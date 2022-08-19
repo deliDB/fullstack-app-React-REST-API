@@ -1,5 +1,7 @@
 #dependencies
 /node_modules
+/api/node_modules
+/client/node_modules
 
 #mockups
 /markup
@@ -7,3 +9,5 @@
 
 #misc
 .DS_Store
+/api/migrations
+/api/seeders
