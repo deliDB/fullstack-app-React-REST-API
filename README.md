@@ -13,6 +13,6 @@ A full stack application that provides users a way to administer a school databa
     <li>Download the project files</li>
     <li>Install the project dependencies in the api and client folders</li>
     <li>Run <strong>npm start</strong> in the terminal to launch the application in both the api and client folders</li>
-
+</ul>
 <br>
 <p>Note: If using macOS Monterey or above, disable Airplay to be able to use port 5000.</p>
