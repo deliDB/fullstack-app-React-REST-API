@@ -1,17 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import { Context } from '../Context';
 
 function CourseDetail() {
     const [ course, setCourse ] = useState([]);
     const context = useContext(Context);
     const { id } = useParams();
+    const history = useHistory();
+
 
     useEffect(() => {
         context.actions.getCourse(id)
             .then(res => setCourse(res))
             .catch(error => console.log('Error fetching and parsing data', error))
     }, [])
+
+    const handleDelete = async (e) => {
+        context.actions.deleteCourse(id)
+            .then(history.push('/'))
+    }
+
     return (
         <main>
             <div className="actions--bar">

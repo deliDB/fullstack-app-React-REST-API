@@ -25,6 +25,42 @@ export const Provider = ({ children }) => {
     return fetch(url, options);
   };
 
+  /******************** Users ********************/
+
+  const getUser = async(username, password) => {
+    const response = await api('/users', 'GET', null, true, { username, password });
+    if(response.status === 200){
+      return response.json().then(data => data);
+    } else if (response.status === 401){
+      return null;
+    } else {
+      throw new Error();
+    }
+  }
+
+  const createUser = async(user) => {
+    const response = await api('/users', 'POST', user)
+    if (response.status === 201){
+      return [];
+    } else if (response.status === 400){
+      return response.json().then(data => data.errors);
+    } else {
+      throw new Error();
+    }
+  }
+
+  const signIn = async(username, password) => {
+    const user = await this.getUser(username, password);
+
+  }
+
+  const signOut = async() => {
+
+  }
+
+
+  /******************** Courses ********************/
+
   const getCourses = async () => {
     const response = await api('/courses');
       if(response.status === 200){
@@ -46,7 +82,7 @@ export const Provider = ({ children }) => {
   }
 
   const createCourse = async(course) => {
-    const response = await api('/courses/create', 'POST', course);
+    const response = await api('/courses', 'POST', course);
     if (response.status === 201){
       return [];
     } else if (response.status === 400){
@@ -66,12 +102,27 @@ export const Provider = ({ children }) => {
       throw new Error();
     }
   }
+
+  const deleteCourse = async(id) => {
+    const response = await api(`/courses/${id}`, 'DELETE')
+    if(response.status === 204){
+      console.log('Course successfully deleted');
+    } else if (response.status === 403){
+      console.log("You don't have permission to delete this course.")
+    } else { 
+      throw new Error();
+    }
+  }
+
   const value = {
     actions: {
       getCourses,
       getCourse,
       createCourse,
-      updateCourse
+      updateCourse,
+      deleteCourse,
+      getUser,
+      createUser
     }
   }
     return (

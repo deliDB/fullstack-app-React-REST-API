@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../Context';
 
-function CreateCourse (){
+function CreateCourse() {
     const [courseTitle, setCourseTitle] = useState('');
     const [courseDescription, setCourseDescription] = useState('');
     const [estimatedTime, setEstimatedTime] = useState('');
