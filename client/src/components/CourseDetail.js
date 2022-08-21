@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { Context } from '../Context';
 
 function CourseDetail() {
-    const [ data, setData ] = useState([]);
+    const [ course, setCourse ] = useState([]);
+    const context = useContext(Context);
     const { id } = useParams();
 
     useEffect(() => {
-        axios(`http://localhost:5000/api/courses/${id}`)
-            .then(response => setData(response.data))
+        context.actions.getCourse(id)
+            .then(res => setCourse(res))
             .catch(error => console.log('Error fetching and parsing data', error))
     }, [])
     return (
@@ -16,7 +17,7 @@ function CourseDetail() {
             <div className="actions--bar">
                 <div className="wrap">
                     <Link className="button" to="update-course.html">Update Course</Link>
-                    <Link className="button" to="#">Delete Course</Link>
+                    <Link className="button" to='/'>Delete Course</Link>
                     <Link className="button button-secondary" to="/">Return to List</Link>
                 </div>
             </div>
@@ -27,18 +28,18 @@ function CourseDetail() {
                     <div className="main--flex">
                         <div>
                             <h3 className="course--detail--title">Course</h3>
-                            <h4 className="course--name">{ data.title }</h4>
-                            <p>By {data.firstName} {data.lastName}</p>
-                            <p>{ data.description }</p>
+                            <h4 className="course--name">{ course.title }</h4>
+                            <p>By {course.firstName} {course.lastName}</p>
+                            <p>{ course.description }</p>
 
                         </div>
                         <div>
                             <h3 className="course--detail--title">Estimated Time</h3>
-                            <p>{ data.estimatedTime }</p>
+                            <p>{ course.estimatedTime }</p>
 
                             <h3 className="course--detail--title">Materials Needed</h3>
                             <ul className="course--detail--list">
-                                { data.materialsNeeded }
+                                { course.materialsNeeded }
                             </ul>
                         </div>                
                     </div>

@@ -1,40 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// import api from '../api/config';
-import axios from 'axios';
+import { Context } from '../Context';
 
-function CreateCourse ({ courses, setCourses }){
+function CreateCourse (){
     const [courseTitle, setCourseTitle] = useState('');
     const [courseDescription, setCourseDescription] = useState('');
     const [estimatedTime, setEstimatedTime] = useState('');
     const [materialsNeeded, setMaterialsNeeded] = useState('');
     const [errors, setErrors] = useState([]);
+    
+    const context = useContext(Context);
     const history = useHistory();
 
     const handleSubmit = async (e) => {
+        const newCourse = {courseTitle, courseDescription, estimatedTime, materialsNeeded};
         e.preventDefault();
-        addCourse();
+        context.actions.createCourse(newCourse)
+            .then(errors => errors.length ? setErrors(errors) : history.push('/'))
     }
 
-    const addCourse = async () => {
-        try {
-            const newCourse = {courseTitle, courseDescription, estimatedTime, materialsNeeded};
-            const response = await axios.post('/http://localhost:5000/api/courses/create', newCourse, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            console.log(response)
-            setCourses([response.data, ...courses]);
-            setCourseTitle('');
-            setCourseDescription('');
-            setEstimatedTime('');
-            setMaterialsNeeded('');
-            history.push('/');
-        } catch (errors) {
-            setErrors(errors);
-        }
-    };
     return (
         <main>
             <div class="wrap">

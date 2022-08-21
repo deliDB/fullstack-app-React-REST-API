@@ -5,7 +5,7 @@ export const Context = React.createContext({});
 
 export const Provider = ({ children }) => {
   function api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
-    const url = config.apiBaseUrl + path;
+    const url = config.apiBaseURL + path;
   
     const options = {
       method,
@@ -28,19 +28,54 @@ export const Provider = ({ children }) => {
   const getCourses = async () => {
     const response = await api('/courses');
       if(response.status === 200){
-          return response.json().then((data) => data);
-        } else if (response.status === 401){
-          return null;
+          return response.json().then(data => data);
         } else {
           throw new Error();
         }
   }  
+
+  const getCourse = async (id) => {
+    const response = await api(`/courses/${id}`);
+      if(response.status === 200){
+          return response.json().then((data) => data);
+        } else if (response.status === 404){
+          return null
+        } else {
+          throw new Error();
+        }
+  }
+
+  const createCourse = async(course) => {
+    const response = await api('/courses/create', 'POST', course);
+    if (response.status === 201){
+      return [];
+    } else if (response.status === 400){
+      return response.json().then(data => data.errors);
+    } else {
+      throw new Error();
+    }
+  }
+
+  const updateCourse = async(course, id)=> {
+    const response = await api(`/courses/${id}`, 'PUT', course);
+    if(response.status === 204){
+      return [];
+    } else if (response.status === 400){
+      return response.json().then(data => data.errors);
+    } else {
+      throw new Error();
+    }
+  }
+  const value = {
+    actions: {
+      getCourses,
+      getCourse,
+      createCourse,
+      updateCourse
+    }
+  }
     return (
-        <Context.Provider value={{
-          actions: {
-            getCourses
-          }
-        }}>
+        <Context.Provider value={value}>
             {children}
         </Context.Provider>    
     )
@@ -63,3 +98,10 @@ export default function withContext(Component) {
     );
   }
 }
+/**
+ * Sources: 
+ * https://howtojs.io/how-to-use-fetch-api-with-async-await-try-catch-then-catch-in-useeffect-hook-in-react-application/
+ * https://teamtreehouse.com/library/practice-hooks-in-react
+ * https://www.youtube.com/watch?v=ngVvDegsAW8
+ * 
+ */
