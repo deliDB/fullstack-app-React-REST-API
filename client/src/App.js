@@ -5,18 +5,21 @@ import {
   Switch
 } from 'react-router-dom';
 
-import Header from './components/Header';
+// import Header from './components/Header';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
+import CreateCourse from './components/CreateCourse';
 
-export default () => (
+const App = () => (
   <Router>
     <div>
       <Switch>
         <Route exact path='/' component={Courses} />
-        <Route path='/courses/:id' component={CourseDetail} />
+        <Route exact path='/courses/:id' component={CourseDetail} />
+        <Route exact path='/courses/create' component={CreateCourse} />
       </Switch>
     </div>
   </Router>
 );
 
+export default App

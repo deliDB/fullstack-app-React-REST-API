@@ -11,7 +11,6 @@ function CourseDetail() {
             .then(response => setData(response.data))
             .catch(error => console.log('Error fetching and parsing data', error))
     }, [])
-    console.log(data.user.firstName, data.user.lastName)
     return (
         <main>
             <div className="actions--bar">
@@ -29,7 +28,7 @@ function CourseDetail() {
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{ data.title }</h4>
-                            <p>By {data.user.firstName} {data.user.lastName}</p>
+                            <p>By {data.firstName} {data.lastName}</p>
                             <p>{ data.description }</p>
 
                         </div>
