@@ -17,15 +17,15 @@ function CourseDetail() {
 
     const handleDelete = async (e) => {
         context.actions.deleteCourse(id)
-            .then(history.push('/'))
+            .then(() => history.push('/'))
     }
 
     return (
         <main>
             <div className="actions--bar">
                 <div className="wrap">
-                    <Link className="button" to="update-course.html">Update Course</Link>
-                    <Link className="button" to='/'>Delete Course</Link>
+                    <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
+                    <button className="button" onClick={handleDelete}>Delete Course</button>
                     <Link className="button button-secondary" to="/">Return to List</Link>
                 </div>
             </div>
