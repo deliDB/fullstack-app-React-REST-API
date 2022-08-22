@@ -35,7 +35,7 @@ function UserSignIn (){
                          id="emailAddress" 
                          name="emailAddress" 
                          type="email" 
-                         value=""
+                         value={emailAddress}
                          onChange={ e => setEmailAddress(e.target.value)}
                          placeholder="Email Address"
                     />
@@ -44,7 +44,7 @@ function UserSignIn (){
                         id="password" 
                         name="password" 
                         type="password" 
-                        value="" 
+                        value={password} 
                         onChange={ e => setPassword(e.target.value)}
                         placeholder="Password"
                     />
