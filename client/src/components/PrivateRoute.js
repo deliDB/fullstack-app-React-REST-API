@@ -3,7 +3,8 @@ import { Route, Redirect } from 'react-router-dom';
 import { Consumer } from '../Context';
 
 /**
- * high order component to configure protected routes (routes requiring authorization)
+ * high order component to configure protected routes (routes requiring authentication)
+ * User is redirected to sign in screen if there's an attempt to access a private route.
  */
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

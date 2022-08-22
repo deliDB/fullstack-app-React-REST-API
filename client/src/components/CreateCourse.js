@@ -15,6 +15,7 @@ function CreateCourse() {
     const authenticatedPassword = context.authenticatedPassword;
 
     const handleSubmit = async (e) => {
+        //userId identifies who created the course, which is used to identify if they're authorized to edit/delete the course
         const newCourse = {userId: authenticatedUser.id, title: courseTitle, description: courseDescription, estimatedTime, materialsNeeded};
         const emailAddress = authenticatedUser.email;
         const password = authenticatedPassword;

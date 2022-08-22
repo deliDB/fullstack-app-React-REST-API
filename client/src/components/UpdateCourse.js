@@ -16,6 +16,7 @@ function UpdateCourse (){
     const { id } = useParams();
     const history = useHistory();
 
+    //Get single course to be updated
     useEffect(() => {
         context.actions.getCourse(id)
             .then(res => {
@@ -33,6 +34,7 @@ function UpdateCourse (){
         const password = authenticatedPassword;
 
         e.preventDefault();
+        //If there are no validation errors (title and description are required), return to home
         context.actions.updateCourse(updatedCourse, id, emailAddress, password)
             .then(errors => errors.length ? setErrors(errors) : history.push('/'))
     }

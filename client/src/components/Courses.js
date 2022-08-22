@@ -6,6 +6,7 @@ function Courses() {
     const [ courses, setCourses ] = useState([]);
     const context = useContext(Context);
 
+    //getCourses function from Context returns all courses, assigns response to courses
     useEffect(() => {
         context.actions.getCourses()
             .then(res => setCourses(res))

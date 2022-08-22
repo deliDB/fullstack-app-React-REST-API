@@ -18,8 +18,9 @@ function UserSignUp() {
         context.actions.createUser(newUser)
             .then(errors => {
                 if(errors.length){
-                    setErrors(errors)
+                    setErrors(errors) //Validation errors assigned to errors array. 
                 } else {
+                    //If account is successfully created, the user is automatically signed in
                     context.actions.signIn(emailAddress, password)
                         .then(() => {
                             console.log('Account creation and sign in successful');

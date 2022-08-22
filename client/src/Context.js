@@ -56,8 +56,9 @@ export const Provider = ({ children }) => {
   const signIn = async(username, password) => {
     const user = await getUser(username, password);
     if(user!== null){
-      console.log(user);
+      //user object returns id, email, first name, and last name
       setAuthenticatedUser(user)
+      //authenticated user doesn't return password so this assigns the user password to authenticatedPassword
       setAuthenticatedPassword(password);
     }
       return user;
@@ -91,7 +92,7 @@ export const Provider = ({ children }) => {
         }
   }
 
-  //
+  
   const createCourse = async(course, username, password) => {
     const response = await api('/courses', 'POST', course, true, {username, password});
     if (response.status === 201){

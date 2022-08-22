@@ -13,6 +13,7 @@ function UserSignIn (){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        //If there's no user with the email address entered in the database, sign in fails, otherwise there's a redirect to the main page.
         context.actions.signIn(emailAddress, password)
             .then((user) => {
                 if(user === null){
