@@ -14,6 +14,8 @@ import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
 import UserSignOut from './components/UserSignOut';
 
+// import PrivateRoute from './components/PrivateRoute';
+
 const App = () => (
   <Router>
     <div>
