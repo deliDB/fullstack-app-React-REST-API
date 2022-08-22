@@ -7,7 +7,7 @@ function CreateCourse() {
     const [courseDescription, setCourseDescription] = useState('');
     const [estimatedTime, setEstimatedTime] = useState('');
     const [materialsNeeded, setMaterialsNeeded] = useState('');
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([]); 
     
     const history = useHistory();
     const context = useContext(Context);
@@ -21,7 +21,7 @@ function CreateCourse() {
 
         e.preventDefault();
         context.actions.createCourse(newCourse, emailAddress, password)
-            .then(errors => errors.length ? setErrors(errors) : history.push('/'))
+            .then(errors => errors.length ? setErrors(errors) : history.push('/')) //Any validation errors returned, placed in errors array
     }
 
     return (
@@ -34,7 +34,7 @@ function CreateCourse() {
                     <ul>
                         {errors.map((error, index) => {
                             return(
-                                <li key={index}>{error}</li>
+                                <li key={index}>{error}</li> //Map over any validation errors
                             )
                         })}
                     </ul>

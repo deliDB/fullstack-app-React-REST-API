@@ -5,7 +5,7 @@ import { Context } from '../Context';
 function Header() {
     const context = useContext(Context);
     const authenticatedUser = context.authenticatedUser;
-
+    //If an authenticated user is signed in, show user name and sign out button
     return (
         <header>
             <div className="wrap header--flex">

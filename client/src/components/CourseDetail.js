@@ -6,13 +6,14 @@ import ReactMarkdown from 'react-markdown';
 function CourseDetail() {
     const [ course, setCourse ] = useState([]);
     const context = useContext(Context);
+    //Authenticated user returns object holding id, email, firstName, lastName 
     const authenticatedUser = context.authenticatedUser;
     const authenticatedPassword = context.authenticatedPassword;
 
     const { id } = useParams();
     const history = useHistory();
 
-
+    //Sets response to course variable which holds id, description, etc. 
     useEffect(() => {
         context.actions.getCourse(id)
             .then(res => setCourse(res))
@@ -49,6 +50,7 @@ function CourseDetail() {
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{ course.title }</h4>
+                            {/* <p>By {course.user.firstName} {course.user.lastName}</p> causing error? */}
                             <p>By {course.firstName} {course.lastName}</p>
                             <ReactMarkdown>{ course.description }</ReactMarkdown>
 

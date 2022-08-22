@@ -35,3 +35,7 @@ const App = () => (
 );
 
 export default App
+/**
+ * password validation for user sign up not working, lets you create a user without a password
+ * validation errors don't show up
+ */

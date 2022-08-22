@@ -36,7 +36,7 @@ function UserSignIn (){
                          name="emailAddress" 
                          type="email" 
                          value={emailAddress}
-                         onChange={ e => setEmailAddress(e.target.value)}
+                         onChange={ e => setEmailAddress(e.target.value) }
                          placeholder="Email Address"
                     />
                     <label htmlFor="password">Password</label>
@@ -45,7 +45,7 @@ function UserSignIn (){
                         name="password" 
                         type="password" 
                         value={password} 
-                        onChange={ e => setPassword(e.target.value)}
+                        onChange={ e => setPassword(e.target.value) }
                         placeholder="Password"
                     />
                     <button className="button" type="submit">Sign In</button>

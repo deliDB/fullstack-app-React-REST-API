@@ -83,7 +83,7 @@ export const Provider = ({ children }) => {
   const getCourse = async (id) => {
     const response = await api(`/courses/${id}`);
       if(response.status === 200){
-          return response.json().then((data) => data);
+          return response.json().then(data => data);
         } else if (response.status === 404){
           return null
         } else {
@@ -91,6 +91,7 @@ export const Provider = ({ children }) => {
         }
   }
 
+  //
   const createCourse = async(course, username, password) => {
     const response = await api('/courses', 'POST', course, true, {username, password});
     if (response.status === 201){
