@@ -27,7 +27,7 @@ function UserSignIn (){
 
     return (
         <main>
-            <div class="form--centered">
+            <div className="form--centered">
                 <h2>Sign In</h2>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="emailAddress">Email Address</label>
@@ -45,7 +45,7 @@ function UserSignIn (){
                         name="password" 
                         type="password" 
                         value="" 
-                        onChange={ e=> setPassword(e.target.value)}
+                        onChange={ e => setPassword(e.target.value)}
                         placeholder="Password"
                     />
                     <button className="button" type="submit">Sign In</button>

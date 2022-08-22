@@ -9,22 +9,26 @@ function CreateCourse() {
     const [materialsNeeded, setMaterialsNeeded] = useState('');
     const [errors, setErrors] = useState([]);
     
-    const context = useContext(Context);
     const history = useHistory();
+    const context = useContext(Context);
+    const authenticatedUser = context.authenticatedUser;
 
     const handleSubmit = async (e) => {
         const newCourse = {courseTitle, courseDescription, estimatedTime, materialsNeeded};
+        const emailAddress = authenticatedUser.username;
+        const password = authenticatedUser.password;
+
         e.preventDefault();
-        context.actions.createCourse(newCourse)
+        context.actions.createCourse(newCourse, emailAddress, password)
             .then(errors => errors.length ? setErrors(errors) : history.push('/'))
     }
 
     return (
         <main>
-            <div class="wrap">
+            <div className="wrap">
                 <h2>Create Course</h2>
                 {errors.length ? 
-                <div class="validation--errors">
+                <div className="validation--errors">
                     <h3>Validation Errors</h3>
                     <ul>
                         {errors.map((error, index) => {
@@ -36,7 +40,7 @@ function CreateCourse() {
                 </div>
                 : null }
                 <form onSubmit={handleSubmit}>
-                    <div class="main--flex">
+                    <div className="main--flex">
                         <div>
                             <label htmlFor="courseTitle">Course Title</label>
                             <input 

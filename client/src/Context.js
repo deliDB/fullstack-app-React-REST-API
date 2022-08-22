@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import config from './config';
 
 export const Context = React.createContext({});
 
 export const Provider = ({ children }) => {
+
+  const [authenticatedUser, setAuthenticatedUser] = useState(null);
+
   function api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
     const url = config.apiBaseURL + path;
   
@@ -50,12 +53,15 @@ export const Provider = ({ children }) => {
   }
 
   const signIn = async(username, password) => {
-    const user = await this.getUser(username, password);
-
+    const user = await getUser(username, password);
+    if(user!== null){
+      setAuthenticatedUser(user)
+    }
+      return user;
   }
 
   const signOut = async() => {
-
+    setAuthenticatedUser(null);
   }
 
 
@@ -81,8 +87,8 @@ export const Provider = ({ children }) => {
         }
   }
 
-  const createCourse = async(course) => {
-    const response = await api('/courses', 'POST', course);
+  const createCourse = async(course, username, password) => {
+    const response = await api('/courses', 'POST', course, true, {username, password});
     if (response.status === 201){
       return [];
     } else if (response.status === 400){
@@ -92,8 +98,8 @@ export const Provider = ({ children }) => {
     }
   }
 
-  const updateCourse = async(course, id)=> {
-    const response = await api(`/courses/${id}`, 'PUT', course);
+  const updateCourse = async(course, id, username, password)=> {
+    const response = await api(`/courses/${id}`, 'PUT', course, true, {username, password});
     if(response.status === 204){
       return [];
     } else if (response.status === 400){
@@ -103,8 +109,8 @@ export const Provider = ({ children }) => {
     }
   }
 
-  const deleteCourse = async(id) => {
-    const response = await api(`/courses/${id}`, 'DELETE')
+  const deleteCourse = async(id, username, password) => {
+    const response = await api(`/courses/${id}`, 'DELETE', null, true, {username, password})
     if(response.status === 204){
       console.log('Course successfully deleted');
     } else if (response.status === 403){
@@ -115,6 +121,7 @@ export const Provider = ({ children }) => {
   }
 
   const value = {
+    authenticatedUser,
     actions: {
       getCourses,
       getCourse,
@@ -122,7 +129,9 @@ export const Provider = ({ children }) => {
       updateCourse,
       deleteCourse,
       getUser,
-      createUser
+      createUser,
+      signIn,
+      signOut
     }
   }
     return (

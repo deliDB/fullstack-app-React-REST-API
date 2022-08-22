@@ -33,10 +33,10 @@ function UserSignUp() {
     }
     return (
         <main>
-            <div class="form--centered">
+            <div className="form--centered">
                 <h2>Sign Up</h2>
                 {errors.length ? 
-                <div class="validation--errors">
+                <div className="validation--errors">
                     <h3>Validation Errors</h3>
                     <ul>
                         {errors.map((error, index) => {

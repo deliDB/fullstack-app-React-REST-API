@@ -10,6 +10,7 @@ function UpdateCourse (){
     const [errors, setErrors] = useState([]);
     
     const context = useContext(Context);
+    const authenticatedUser = context.authenticatedUser;
     const { id } = useParams();
     const history = useHistory();
 
@@ -26,17 +27,20 @@ function UpdateCourse (){
 
     const handleSubmit = async (e) => {
         const updatedCourse = {courseTitle, courseDescription, estimatedTime, materialsNeeded};
+        const emailAddress = authenticatedUser.username;
+        const password = authenticatedUser.password;
+
         e.preventDefault();
-        context.actions.updateCourse(updatedCourse)
+        context.actions.updateCourse(updatedCourse, emailAddress, password)
             .then(errors => errors.length ? setErrors(errors) : history.push('/'))
     }
 
     return (
     <main>
-        <div class="wrap">
+        <div className="wrap">
             <h2>Update Course</h2>
             {errors.length ? 
-                <div class="validation--errors">
+                <div className="validation--errors">
                     <h3>Validation Errors</h3>
                     <ul>
                         {errors.map((error, index) => {
@@ -49,22 +53,44 @@ function UpdateCourse (){
                 : null
             }
                 <form onSubmit={handleSubmit}>
-                    <div class="main--flex">
+                    <div className="main--flex">
                         <div>
                             <label htmlFor="courseTitle">Course Title</label>
-                            <input id="courseTitle" name="courseTitle" type="text" value={courseTitle} onChange={ e => setCourseTitle(e.target.value)}/>
+                            <input 
+                                id="courseTitle" 
+                                name="courseTitle" 
+                                type="text" 
+                                value={courseTitle} 
+                                onChange={ e => setCourseTitle(e.target.value)}       
+                            />
 
                             <p>By Joe Smith</p>
 
                             <label htmlFor="courseDescription">Course Description</label>
-                            <textarea id="courseDescription" name="courseDescription" value={courseDescription} onChange={ e=> setCourseDescription(e.target.value)}></textarea>
+                            <textarea 
+                                id="courseDescription" 
+                                name="courseDescription" 
+                                value={courseDescription} 
+                                onChange={ e=> setCourseDescription(e.target.value)}>
+                            </textarea>
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
-                            <input id="estimatedTime" name="estimatedTime" type="text" value={estimatedTime} onChange={ e => setEstimatedTime(e.target.value)}/>
+                            <input 
+                                id="estimatedTime" 
+                                name="estimatedTime" 
+                                type="text" 
+                                value={estimatedTime} 
+                                onChange={ e => setEstimatedTime(e.target.value)}
+                            />
 
-                            <label for="materialsNeeded">Materials Needed</label>
-                            <textarea id="materialsNeeded" name="materialsNeeded" value={materialsNeeded} onChange={ e=> setMaterialsNeeded(e.target.value)}></textarea>
+                            <label htmlFor="materialsNeeded">Materials Needed</label>
+                            <textarea 
+                                id="materialsNeeded" 
+                                name="materialsNeeded" 
+                                value={materialsNeeded} 
+                                onChange={ e=> setMaterialsNeeded(e.target.value)}>
+                            </textarea>
                         </div>
                     </div>
                     <button className="button" type="submit">Update Course</button>
