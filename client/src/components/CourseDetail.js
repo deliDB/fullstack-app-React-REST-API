@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { Context } from '../Context';
+import ReactMarkdown from 'react-markdown';
 
 function CourseDetail() {
     const [ course, setCourse ] = useState([]);
@@ -49,7 +50,7 @@ function CourseDetail() {
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{ course.title }</h4>
                             <p>By {course.firstName} {course.lastName}</p>
-                            <p>{ course.description }</p>
+                            <ReactMarkdown>{ course.description }</ReactMarkdown>
 
                         </div>
                         <div>
@@ -58,7 +59,7 @@ function CourseDetail() {
 
                             <h3 className="course--detail--title">Materials Needed</h3>
                             <ul className="course--detail--list">
-                                { course.materialsNeeded }
+                                <ReactMarkdown>{ course.materialsNeeded }</ReactMarkdown>
                             </ul>
                         </div>                
                     </div>

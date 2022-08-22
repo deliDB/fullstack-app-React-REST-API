@@ -14,7 +14,7 @@ import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
 import UserSignOut from './components/UserSignOut';
 
-// import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => (
   <Router>
@@ -23,8 +23,8 @@ const App = () => (
 
       <Switch>
         <Route exact path='/' component={Courses} />
-        <Route path='/courses/create' component={CreateCourse} />
-        <Route path='/courses/:id/update' component={UpdateCourse} />
+        <PrivateRoute path='/courses/create' component={CreateCourse} />
+        <PrivateRoute path='/courses/:id/update' component={UpdateCourse} />
         <Route path='/courses/:id' component={CourseDetail} />
         <Route path='/signin' component={UserSignIn} />
         <Route path='/signup' component={UserSignUp} />
