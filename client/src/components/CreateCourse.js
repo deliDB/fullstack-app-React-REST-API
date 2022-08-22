@@ -15,7 +15,7 @@ function CreateCourse() {
     const authenticatedPassword = context.authenticatedPassword;
 
     const handleSubmit = async (e) => {
-        const newCourse = {courseTitle, courseDescription, estimatedTime, materialsNeeded};
+        const newCourse = {userId: authenticatedUser.id, courseTitle, courseDescription, estimatedTime, materialsNeeded};
         const emailAddress = authenticatedUser.email;
         const password = authenticatedPassword;
 
