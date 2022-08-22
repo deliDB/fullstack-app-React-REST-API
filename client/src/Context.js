@@ -5,7 +5,8 @@ export const Context = React.createContext({});
 
 export const Provider = ({ children }) => {
 
-  const [authenticatedUser, setAuthenticatedUser] = useState(null);
+  const [authenticatedUser, setAuthenticatedUser] = useState('');
+  const [authenticatedPassword, setAuthenticatedPassword] = useState('');
 
   function api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
     const url = config.apiBaseURL + path;
@@ -55,13 +56,16 @@ export const Provider = ({ children }) => {
   const signIn = async(username, password) => {
     const user = await getUser(username, password);
     if(user!== null){
+      console.log(user);
       setAuthenticatedUser(user)
+      setAuthenticatedPassword(password);
     }
       return user;
   }
 
   const signOut = async() => {
     setAuthenticatedUser(null);
+    setAuthenticatedPassword('');
   }
 
 
@@ -122,6 +126,7 @@ export const Provider = ({ children }) => {
 
   const value = {
     authenticatedUser,
+    authenticatedPassword,
     actions: {
       getCourses,
       getCourse,

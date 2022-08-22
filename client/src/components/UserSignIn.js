@@ -16,7 +16,7 @@ function UserSignIn (){
         context.actions.signIn(emailAddress, password)
             .then((user) => {
                 if(user === null){
-                    console.log('User not found');
+                    console.log('Sign In unsuccessful.');
                     setErrors(errors)
                 } else {
                     history.push('/');

@@ -6,6 +6,8 @@ function CourseDetail() {
     const [ course, setCourse ] = useState([]);
     const context = useContext(Context);
     const authenticatedUser = context.authenticatedUser;
+    const authenticatedPassword = context.authenticatedPassword;
+
     const { id } = useParams();
     const history = useHistory();
 
@@ -17,8 +19,8 @@ function CourseDetail() {
     }, [])
 
     const handleDelete = async (e) => {
-        const emailAddress = authenticatedUser.username;
-        const password = authenticatedUser.password;
+        const emailAddress = authenticatedUser.email;
+        const password = authenticatedPassword;
         context.actions.deleteCourse(id, emailAddress, password)
             .then(() => history.push('/'))
     }

@@ -12,11 +12,12 @@ function CreateCourse() {
     const history = useHistory();
     const context = useContext(Context);
     const authenticatedUser = context.authenticatedUser;
+    const authenticatedPassword = context.authenticatedPassword;
 
     const handleSubmit = async (e) => {
         const newCourse = {courseTitle, courseDescription, estimatedTime, materialsNeeded};
-        const emailAddress = authenticatedUser.username;
-        const password = authenticatedUser.password;
+        const emailAddress = authenticatedUser.email;
+        const password = authenticatedPassword;
 
         e.preventDefault();
         context.actions.createCourse(newCourse, emailAddress, password)
@@ -51,7 +52,7 @@ function CreateCourse() {
                                 onChange={ e => setCourseTitle(e.target.value)}
                             />
 
-                            <p>By Joe Smith</p>
+                            <p>By {authenticatedUser.firstName} {authenticatedUser.lastName}</p>
 
                             <label htmlFor="courseDescription">Course Description</label>
                             <textarea 

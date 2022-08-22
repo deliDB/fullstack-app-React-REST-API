@@ -11,6 +11,8 @@ function UpdateCourse (){
     
     const context = useContext(Context);
     const authenticatedUser = context.authenticatedUser;
+    const authenticatedPassword = context.authenticatedPassword;
+
     const { id } = useParams();
     const history = useHistory();
 
@@ -27,8 +29,8 @@ function UpdateCourse (){
 
     const handleSubmit = async (e) => {
         const updatedCourse = {courseTitle, courseDescription, estimatedTime, materialsNeeded};
-        const emailAddress = authenticatedUser.username;
-        const password = authenticatedUser.password;
+        const emailAddress = authenticatedUser.email;
+        const password = authenticatedPassword;
 
         e.preventDefault();
         context.actions.updateCourse(updatedCourse, emailAddress, password)
