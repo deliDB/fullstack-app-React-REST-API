@@ -33,7 +33,7 @@ function UpdateCourse (){
         const password = authenticatedPassword;
 
         e.preventDefault();
-        context.actions.updateCourse(updatedCourse, emailAddress, password)
+        context.actions.updateCourse(updatedCourse, id, emailAddress, password)
             .then(errors => errors.length ? setErrors(errors) : history.push('/'))
     }
 
@@ -66,7 +66,7 @@ function UpdateCourse (){
                                 onChange={ e => setCourseTitle(e.target.value)}       
                             />
 
-                            <p>By Joe Smith</p>
+                            <p>By {authenticatedUser.firstName} {authenticatedUser.lastName}</p>
 
                             <label htmlFor="courseDescription">Course Description</label>
                             <textarea 

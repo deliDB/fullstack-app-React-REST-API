@@ -3,10 +3,10 @@ import { Route, Redirect } from 'react-router-dom';
 import { Consumer } from '../Context';
 
 /**
- * high
+ * high order component to configure protected routes
  */
 
-export default ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Consumer>
       {context => (
@@ -26,3 +26,8 @@ export default ({ component: Component, ...rest }) => {
     </Consumer>
   );
 };
+
+export default PrivateRoute
+/**
+ * Source: https://teamtreehouse.com/library/react-authentication/react-router-and-authentication/protect-routes-that-require-authentication
+ */
