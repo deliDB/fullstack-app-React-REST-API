@@ -63,7 +63,7 @@ function UpdateCourse (){
                                 name="courseTitle" 
                                 type="text" 
                                 value={courseTitle} 
-                                onChange={ e => setCourseTitle(e.target.value)}       
+                                onChange={ e => setCourseTitle(e.target.value) }       
                             />
 
                             <p>By {authenticatedUser.firstName} {authenticatedUser.lastName}</p>
@@ -73,7 +73,7 @@ function UpdateCourse (){
                                 id="courseDescription" 
                                 name="courseDescription" 
                                 value={courseDescription} 
-                                onChange={ e => setCourseDescription(e.target.value)}>
+                                onChange={ e => setCourseDescription(e.target.value) }>
                             </textarea>
                         </div>
                         <div>
@@ -83,7 +83,7 @@ function UpdateCourse (){
                                 name="estimatedTime" 
                                 type="text" 
                                 value={estimatedTime} 
-                                onChange={ e => setEstimatedTime(e.target.value)}
+                                onChange={ e => setEstimatedTime(e.target.value) }
                             />
 
                             <label htmlFor="materialsNeeded">Materials Needed</label>
@@ -91,7 +91,7 @@ function UpdateCourse (){
                                 id="materialsNeeded" 
                                 name="materialsNeeded" 
                                 value={materialsNeeded} 
-                                onChange={ e => setMaterialsNeeded(e.target.value)}>
+                                onChange={ e => setMaterialsNeeded(e.target.value) }>
                             </textarea>
                         </div>
                     </div>

@@ -50,8 +50,7 @@ function CourseDetail() {
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{ course.title }</h4>
-                            {/* <p>By {course.user.firstName} {course.user.lastName}</p> causing error? */}
-                            <p>By {course.firstName} {course.lastName}</p>
+                            <p>By {course.user?.firstName} {course.user?.lastName}</p> causing error?
                             <ReactMarkdown>{ course.description }</ReactMarkdown>
 
                         </div>
