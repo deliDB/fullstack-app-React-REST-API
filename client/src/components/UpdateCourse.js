@@ -28,7 +28,7 @@ function UpdateCourse (){
     }, [])
 
     const handleSubmit = async (e) => {
-        const updatedCourse = {courseTitle, courseDescription, estimatedTime, materialsNeeded};
+        const updatedCourse = {title: courseTitle, description: courseDescription, estimatedTime, materialsNeeded};
         const emailAddress = authenticatedUser.email;
         const password = authenticatedPassword;
 
@@ -73,7 +73,7 @@ function UpdateCourse (){
                                 id="courseDescription" 
                                 name="courseDescription" 
                                 value={courseDescription} 
-                                onChange={ e=> setCourseDescription(e.target.value)}>
+                                onChange={ e => setCourseDescription(e.target.value)}>
                             </textarea>
                         </div>
                         <div>
@@ -91,7 +91,7 @@ function UpdateCourse (){
                                 id="materialsNeeded" 
                                 name="materialsNeeded" 
                                 value={materialsNeeded} 
-                                onChange={ e=> setMaterialsNeeded(e.target.value)}>
+                                onChange={ e => setMaterialsNeeded(e.target.value)}>
                             </textarea>
                         </div>
                     </div>
