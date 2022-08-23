@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../Context';
 
 function UserSignUp() {
-    const context = useContext(Context);
+    const { actions } = useContext(Context);
     const history = useHistory();
 
     const [firstName, setFirstName] = useState('');
@@ -15,13 +15,13 @@ function UserSignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newUser = {firstName, lastName, emailAddress, password};
-        context.actions.createUser(newUser)
+        actions.createUser(newUser)
             .then(errors => {
                 if(errors.length){
                     setErrors(errors) //Validation errors assigned to errors array. 
                 } else {
                     //If account is successfully created, the user is automatically signed in
-                    context.actions.signIn(emailAddress, password)
+                    actions.signIn(emailAddress, password)
                         .then(() => {
                             console.log('Account creation and sign in successful');
                             history.push('/');

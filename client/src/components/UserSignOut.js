@@ -4,9 +4,9 @@ import { Context } from '../Context';
 
 //Call signOut function from Context and redirects user to main page
 function UserSignOut(){
-    const context = useContext(Context);
+    const { actions } = useContext(Context);
     useEffect(() => {
-        context.actions.signOut();
+        actions.signOut();
     }, []);
 
     return (

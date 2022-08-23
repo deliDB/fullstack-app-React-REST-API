@@ -8,13 +8,13 @@ function UserSignIn (){
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
-    const context = useContext(Context);
+    const { actions } = useContext(Context);
     const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         //If there's no user with the email address entered in the database, sign in fails, otherwise there's a redirect to the main page.
-        context.actions.signIn(emailAddress, password)
+        actions.signIn(emailAddress, password)
             .then((user) => {
                 if(user === null){
                     console.log('Sign In unsuccessful.');
