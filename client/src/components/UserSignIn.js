@@ -23,7 +23,10 @@ function UserSignIn (){
                     history.push('/');
                     console.log(`Sign In was successful! Welcome ${emailAddress}!`);
                 }
-            });
+            })
+            .catch( err => {
+                console.log(err);
+              });
     }
 
     return (

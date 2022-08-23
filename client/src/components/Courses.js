@@ -4,11 +4,11 @@ import { Context } from '../Context';
 
 function Courses() {
     const [ courses, setCourses ] = useState([]);
-    const context = useContext(Context);
+    const { actions } = useContext(Context);
 
     //getCourses function from Context returns all courses, assigns response to courses
     useEffect(() => {
-        context.actions.getCourses()
+        actions.getCourses()
             .then(res => setCourses(res))
             .catch(error => console.log('Error fetching and parsing data', error))
     }, [])

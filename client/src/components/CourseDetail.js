@@ -5,17 +5,15 @@ import ReactMarkdown from 'react-markdown';
 
 function CourseDetail() {
     const [ course, setCourse ] = useState([]);
-    const context = useContext(Context);
     //Authenticated user returns object holding id, email, firstName, lastName 
-    const authenticatedUser = context.authenticatedUser;
-    const authenticatedPassword = context.authenticatedPassword;
-
+    const { actions, authenticatedUser, authenticatedPassword }  = useContext(Context);
+    
     const { id } = useParams();
     const history = useHistory();
 
     //Sets response to course variable which holds id, description, etc. 
     useEffect(() => {
-        context.actions.getCourse(id)
+        actions.getCourse(id)
             .then(res => setCourse(res))
             .catch(error => console.log('Error fetching and parsing data', error))
     }, [])
@@ -23,7 +21,7 @@ function CourseDetail() {
     const handleDelete = async (e) => {
         const emailAddress = authenticatedUser.email;
         const password = authenticatedPassword;
-        context.actions.deleteCourse(id, emailAddress, password)
+        actions.deleteCourse(id, emailAddress, password)
             .then(() => history.push('/'))
     }
 
@@ -50,7 +48,7 @@ function CourseDetail() {
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{ course.title }</h4>
-                            <p>By {course.user?.firstName} {course.user?.lastName}</p> causing error?
+                            <p>By {course.user?.firstName} {course.user?.lastName}</p> 
                             <ReactMarkdown>{ course.description }</ReactMarkdown>
 
                         </div>
