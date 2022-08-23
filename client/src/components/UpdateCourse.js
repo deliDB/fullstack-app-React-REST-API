@@ -9,16 +9,14 @@ function UpdateCourse (){
     const [materialsNeeded, setMaterialsNeeded] = useState('');
     const [errors, setErrors] = useState([]);
     
-    const context = useContext(Context);
-    const authenticatedUser = context.authenticatedUser;
-    const authenticatedPassword = context.authenticatedPassword;
-
+    const { actions, authenticatedUser, authenticatedPassword } = useContext(Context);
+    
     const { id } = useParams();
     const history = useHistory();
 
     //Get single course to be updated
     useEffect(() => {
-        context.actions.getCourse(id)
+        actions.getCourse(id)
             .then(res => {
                 setCourseTitle(res.title)
                 setCourseDescription(res.description)
@@ -35,7 +33,7 @@ function UpdateCourse (){
 
         e.preventDefault();
         //If there are no validation errors (title and description are required), return to home
-        context.actions.updateCourse(updatedCourse, id, emailAddress, password)
+        actions.updateCourse(updatedCourse, id, emailAddress, password)
             .then(errors => errors.length ? setErrors(errors) : history.push('/'))
     }
 

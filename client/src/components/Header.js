@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Context } from '../Context';
 
 function Header() {
-    const context = useContext(Context);
-    const authenticatedUser = context.authenticatedUser;
+    const { authenticatedUser } = useContext(Context);
+    
     return (
         <header>
             <div className="wrap header--flex">

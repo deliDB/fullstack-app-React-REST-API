@@ -10,10 +10,8 @@ function CreateCourse() {
     const [errors, setErrors] = useState([]); 
     
     const history = useHistory();
-    const context = useContext(Context);
-    const authenticatedUser = context.authenticatedUser;
-    const authenticatedPassword = context.authenticatedPassword;
-
+    const { actions, authenticatedUser, authenticatedPassword } = useContext(Context);
+    
     const handleSubmit = async (e) => {
         //userId identifies who created the course, which is used to identify if they're authorized to edit/delete the course
         const newCourse = {userId: authenticatedUser.id, title: courseTitle, description: courseDescription, estimatedTime, materialsNeeded};
@@ -21,7 +19,7 @@ function CreateCourse() {
         const password = authenticatedPassword;
 
         e.preventDefault();
-        context.actions.createCourse(newCourse, emailAddress, password)
+        actions.createCourse(newCourse, emailAddress, password)
             .then(errors => errors.length ? setErrors(errors) : history.push('/')) //Any validation errors returned, placed in errors array
     }
 
